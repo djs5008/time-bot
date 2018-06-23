@@ -1,0 +1,22 @@
+{
+  "name": "time-bot",
+  "version": "1.0.0",
+  "description": "keep track of time on discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djs5008/time-bot.git"
+  },
+  "author": "Dan Schmitt (djs5008@rit.edu)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/djs5008/time-bot/issues"
+  },
+  "homepage": "https://github.com/djs5008/time-bot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  }
+}
