@@ -21,7 +21,7 @@ const loadTimezones = () => {
     guild.channels.forEach(channel => {
       if (channel instanceof Discord.TextChannel && channel.name === 'time') {
         channel.fetchPinnedMessages().then((messages) => {
-	  let firstPin = messages.first().content;
+	  			let firstPin = messages.first().content;
           console.log(firstPin);
           timeZones[guild.id] = firstPin.replace('timezone: ', '');
         }).catch(console.error);
