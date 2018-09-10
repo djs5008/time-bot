@@ -9,20 +9,22 @@ const moment = require('moment-timezone');
 //
 // Vars
 // 
-const timeZones = {};
+let timeZones = {};
 
 /**
  * Load timezones from each guild
  *  TimeZone is loaded and parsed from the first pinned message in the channel named 'time'
  */
 const loadTimezones = () => {
+  timeZones = {};
   client.guilds.forEach(guild => {
     guild.channels.forEach(channel => {
       if (channel instanceof Discord.TextChannel && channel.name === 'time') {
         channel.fetchPinnedMessages().then((messages) => {
-          console.log(messages.first().content);
-          timeZones[guild.id] = messages.first().content.replace('timezone: ', '');
-        });
+	  let firstPin = messages.first().content;
+          console.log(firstPin);
+          timeZones[guild.id] = firstPin.replace('timezone: ', '');
+        }).catch(console.error);
       }
     });
   });
@@ -32,13 +34,13 @@ const loadTimezones = () => {
  * Begin setting the server names to match the timezone
  */
 const startClocks = () => {
-  setInterval(() => {
+  client.setInterval(() => {
     const now = Date.now();
     for (let guildID in timeZones) {
 
       // Format time to work with discord
       const timeZone = timeZones[guildID];
-      const time = moment(now).tz(timeZone).format('hh:mm');
+      const time = moment(now).tz(timeZone).format('hh:mm:ss');
       let formattedTime = time.split('')[0] === '0'
         ? time.replace(/^.(.*)$/g, '$1')
         : time;
@@ -47,10 +49,10 @@ const startClocks = () => {
       // Apply only newly updated names to each guild
       const guild = client.guilds.get(guildID);
       if (guild.name !== formattedTime) {
-        guild.setName(formattedTime);
+        guild.setName(formattedTime).catch(console.error);
       }
     }
-  }, 1000);
+  }, 250);
 };
 
 /**
@@ -66,9 +68,9 @@ client.on('ready', () => {
 /**
  * Handle message event
  */
-client.on('message', msg => {
+//client.on('message', msg => {
   // TODO
-});
+//});
 
 /**
  * Login with TimeBot's Secret Token

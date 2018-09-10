@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/djs5008/time-bot#readme",
   "dependencies": {
+    "bufferutil": "^4.0.0",
     "discord.js": "^11.3.2",
     "load-secret": "file:../../local-modules/load-secret",
     "moment-timezone": "^0.5.21"
