@@ -66,6 +66,14 @@ client.on('ready', () => {
 });
 
 /**
+ * Handle error event
+ */
+client.on('error', (msg) => {
+  console.log('An error has occured!:');
+  console.log(msg);
+});
+
+/**
  * Handle message event
  */
 //client.on('message', msg => {
